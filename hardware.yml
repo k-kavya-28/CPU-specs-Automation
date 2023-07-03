@@ -1,0 +1,15 @@
+- name: Gather Hardware Information
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Set Hardware Facts Variable
+      set_fact:
+        hardware_specs: "{{ ansible_facts }}"
+
+    - name: Save Hardware Information to YAML
+      copy:
+        content: "{{ hardware_specs | to_yaml }}"
+        dest: "/home/abhinav/Abhinav/Ansible/hardwarespecs.yml"
+      delegate_to: localhost
+
